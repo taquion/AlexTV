@@ -1,5 +1,9 @@
+import { config } from "dotenv";
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
+
+// Load .env.local for local execution
+config({ path: ".env.local" });
 
 const MONGODB_URI = process.env.MONGODB_URI!;
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL || "admin@alextv.local";

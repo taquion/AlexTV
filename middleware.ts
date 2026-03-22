@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getTokenFromRequest, verifyToken } from "@/lib/auth";
+import { getTokenFromRequest, verifyTokenEdge } from "@/lib/auth-edge";
 
 const PUBLIC_API_PREFIXES = ["/api/auth", "/api/collections/validate-pin"];
 
@@ -25,7 +25,7 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
 
-  const payload = await verifyToken(token);
+  const payload = await verifyTokenEdge(token);
   if (!payload) {
     if (pathname.startsWith("/api/")) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
